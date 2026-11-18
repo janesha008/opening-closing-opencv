@@ -22,6 +22,11 @@ The program performs the following operations:
 ### Step 1:
 
 Import the required libraries: OpenCV, NumPy, and Matplotlib.
+```
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+```
 
 ### Step 2:
 
@@ -30,10 +35,26 @@ Create or load an input image containing foreground objects.
 ### Step 3:
 
 Display the original image.
+```
+image_path = next(iter(uploaded))
+
+img = cv2.imread(image_path)
+
+# Convert BGR to RGB
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+plt.imshow(img)
+plt.title("Original Image")
+plt.axis('off')
+plt.show()
+```
 
 ### Step 4:
 
 Create a structuring element (kernel) of suitable size.
+```
+kernel = np.ones((5, 5), np.uint8)
+```
 
 ### Step 5: Opening Operation
 
@@ -41,6 +62,14 @@ Create a structuring element (kernel) of suitable size.
 - Opening consists of Erosion followed by Dilation.
 - Remove small foreground noises while preserving the shape of larger objects.
 - Display the opened image.
+```
+opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+plt.imshow(opening)
+plt.title("Opening Image")
+plt.axis('off')
+plt.show()
+```
 
 ### Step 6: Closing Operation
 
@@ -48,18 +77,45 @@ Create a structuring element (kernel) of suitable size.
 - Closing consists of Dilation followed by Erosion.
 - Fill small holes and gaps within foreground objects.
 - Display the closed image.
+```
+closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+
+plt.imshow(closing)
+plt.title("Closing Image")
+plt.axis('off')
+plt.show()
+```
 
 ### Step 7:
 
 Compare the original, opened, and closed images.
+```
+plt.figure(figsize=(15, 5))
 
-## Program
+plt.subplot(1, 3, 1)
+plt.imshow(img)
+plt.title("Original Image")
+plt.axis('off')
 
-## Developed By
+plt.subplot(1, 3, 2)
+plt.imshow(opening)
+plt.title("Opening")
+plt.axis('off')
 
-**Name:** ____________________________
+plt.subplot(1, 3, 3)
+plt.imshow(closing)
+plt.title("Closing")
+plt.axis('off')
 
-**Register No:** ______________________
+plt.tight_layout()
+plt.show()
+```
+
+## Program Developed By
+
+**Name:** Janesha S
+
+**Register No:** 212225240056
 
 ## Output
 
@@ -67,6 +123,9 @@ Compare the original, opened, and closed images.
 
 - The input image is displayed.
 - The image serves as the source for morphological processing.
+
+  <img width="515" height="352" alt="image" src="https://github.com/user-attachments/assets/7cf5347f-c79b-4522-ae97-35eb5e33ec4f" />
+
 
 ### Opening Operation
 
@@ -76,6 +135,9 @@ Compare the original, opened, and closed images.
 - Thin protrusions and isolated pixels are eliminated.
 - Object boundaries become smoother.
 
+  <img width="515" height="352" alt="image" src="https://github.com/user-attachments/assets/0d17938d-b7f9-496b-8e98-ffc8bcf4b851" />
+
+
 ### Closing Operation
 
 - Original image is displayed.
@@ -83,6 +145,12 @@ Compare the original, opened, and closed images.
 - Small holes and gaps inside objects are filled.
 - Broken regions are connected.
 - Object boundaries become more continuous.
+
+  <img width="515" height="352" alt="image" src="https://github.com/user-attachments/assets/71658b31-9708-40d8-91ba-a28680110f7f" />
+
+  <img width="1489" height="342" alt="image" src="https://github.com/user-attachments/assets/0fa28a90-429e-45df-99aa-079af2322533" />
+
+
 
 ## Applications
 
